@@ -78,7 +78,7 @@ bool win() {
 	return true;
 }
 bool move(int x, int y) {
-	int zero_x, zero_y; // Координаты пустой клетки
+	int zero_x, zero_y;
 	for (int i = 0; i < length; i++) {
 		for (int j = 0; j < length; j++) {
 			if (square[i][j] == 0) {
@@ -90,7 +90,7 @@ bool move(int x, int y) {
 	int new_zero_x = zero_x + x;
 	int new_zero_y = zero_y + y;
 	if (new_zero_x < 0 || new_zero_x >= length || new_zero_y < 0 || new_zero_y >= length) {
-		return false; // Попытка выйти за границы поля
+		return false;
 	}
 	replacement(square[zero_x][zero_y], square[new_zero_x][new_zero_y]);
 	return true;
@@ -98,6 +98,7 @@ bool move(int x, int y) {
 
 int main()
 {
+	int startTime = time(0);
 	int index{};
 	init();
 	mix();
@@ -147,6 +148,8 @@ int main()
 			cout << "Cannot move in that direction!" << endl;
 		}
 	}
+	int endTime = time(0);
+	cout << endTime - startTime << "Seconds have been spent";
 	return 0;
 }
 
