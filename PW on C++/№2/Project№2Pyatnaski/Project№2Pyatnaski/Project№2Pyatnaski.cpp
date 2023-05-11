@@ -2,9 +2,9 @@
 #include <ctime>
 #include <windows.h> 
 using namespace std;
-const int length = 3;
+const int length = 4;
 int square[length][length];
-int getClick(int& x)
+int keyFinding(int& x)
 {
 	HANDLE hConsoleIn = GetStdHandle(STD_INPUT_HANDLE);
 	INPUT_RECORD inputRec;
@@ -57,7 +57,6 @@ void pin() {
 	}
 	cout << endl;
 }
-
 bool win() {
 	int count = 1;
 	for (int i = 0; i < length; i++) {
@@ -102,18 +101,24 @@ int main()
 	int index{};
 	init();
 	mix();
-	while (true) {
+	while (true) 
+	{
 		pin();
-		if (win()) {
-			cout << "You won!" << endl;
-			cout << "Summ try = " << index << endl;
+		if (win()) 
+		{
+			int endTime = time(0);
+			cout << "\tYou won!" << endl;
+			cout << "\t" << endTime - startTime << "Seconds have been spent" << endl;
+			cout << "\tNumber of steps = " << index << endl;
 			break;
 		}
 		int x, y = 0;
 		cout << "Use arrow keys to move and press Enter: " << endl;
-		getClick(x);
-		if (x >= 37 || x <= 40) {
-			switch (x) {
+		keyFinding(x);
+		if (x >= 37 || x <= 40)
+		{
+			switch (x)
+			{
 			case 37:
 				x = 0;
 				y = -1;
@@ -122,7 +127,7 @@ int main()
 				x = -1;
 				y = 0;
 				break;
-			case 39:
+			case 39:				// СПРОСИТЬ ПРО time_t ВМЕСТО INT ТАК КАК ВЫДАЁТ ОШИБКУ!!
 				x = 0;
 				y = 1;
 				break;
@@ -130,26 +135,23 @@ int main()
 				x = 1;
 				y = 0;
 				break;
+			case 27:
+				int endTime = time(0);
+				cout << "\tThe game has been closed" << endl;
+				cout << "\tSeconds have been spent: " << endTime - startTime << endl;
+				cout << "\tNumber of steps: " << index << endl;
+				return false;
 			}
 		}
-		else if (x == 27)
+		if (move(x, y)) 
 		{
-			cout << "Exiting" << endl;
-			break;
-		}
-		else {
-			cout << "Unknown key!" << endl;
-			continue;
-		}
-		if (move(x, y)) {
 			index++;
 		}
-		else {
-			cout << "Cannot move in that direction!" << endl;
+		else 
+		{
+			cout << "\tUse the arrows on your keyboard or wrong move!" << endl << "\tTry again!" << endl;
 		}
 	}
-	int endTime = time(0);
-	cout << endTime - startTime << "Seconds have been spent";
 	return 0;
 }
 
