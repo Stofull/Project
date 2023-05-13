@@ -44,16 +44,6 @@ struct CreateToDo
 		list[count] = CreateTaskToDo();
 		count++;
 	}
-	void showtask()
-	{
-		cout << "All tasks: " << endl;
-		for (size_t i = 0; i < count; i++)
-		{
-			cout << "Number " << i + 1 << "- th task" << endl;
-			list[i].print();
-			cout << endl;
-		}
-	}
 	void deletetask(int tmp)
 	{
 		delete[] list[tmp - 1].name;
@@ -70,41 +60,55 @@ struct CreateToDo
 	{
 		list[tmp - 1] = CreateTaskToDo();
 	}
-	void searchByName(char* tmp)
+	void searchBy(char* tmp, int turn)
 	{
-		int turn{};
-		int length = sizeof(tmp);
-		while (true)
+		bool found = false;
+		for (size_t i = 0; i < count; i++)
 		{
-			cin >> turn;
-
-
 			switch (turn)
 			{
 			case 1:
+				if (strcmp(list[i].name, tmp) == 0)
+					found = true;
+				break;
+			case 2:
+				if (strcmp(list[i].data, tmp) == 0)
+					found = true;
+				break;
+			case 3:
+				if (strcmp(list[i].description, tmp) == 0)
+					found = true;
+				break;
+			case 4:
+				if (strcmp(list[i].data, tmp) == 0)
+					found = true;
+				break;
+			case 5:
+				cout << "All tasks: " << endl;
 				for (size_t i = 0; i < count; i++)
 				{
-					int j = 0;
-					while (list[i].name[j] == tmp[j] && tmp[j] != '\0') j++;
-					if (list[i].name[j] == '\0' && tmp[j] == '\0')
-					{
-						cout << i + 1 << "-th task\n";
-						list[i].print();
-					}
-
-
-					break;
+					cout << "Number " << i + 1 << "- th task" << endl;
+					list[i].print();
+					cout << endl;
 				}
+				break;
 			default:
-				cout << "Incorrect input try again" << endl;
+				cout << "Incorrect input, try again." << endl;
+				return;
+			}
+			if (found)
+			{
+				cout << i + 1 << "-th task\n";
+				list[i].print();
 				break;
 			}
-
-
+		}
+		if (!found)
+		{
+			cout << "Not found" << endl;
 		}
 	}
 };
-
 int main()
 {
 	CreateToDo* createList = new CreateToDo{};
@@ -115,9 +119,10 @@ int main()
 	{
 		cout
 			<< "1.Add task" << endl
-			<< "2.Show task" << endl
+			<< "2.Show task by" << endl
 			<< "3.Delete task" << endl
-			<< "4.Edit task" << endl;
+			<< "4.Edit task" << endl
+			<< "Enter any other number to exit" << endl;
 		cin >> choise;
 		cin.ignore();
 		switch (choise)
@@ -128,7 +133,16 @@ int main()
 			break;
 		case 2:
 			system("cls");
-			createList->showtask();
+			cout << "Show task by" << endl
+				<< "1.Name" << endl
+				<< "2.Priority" << endl
+				<< "3.Description" << endl
+				<< "4.Data" << endl
+				<< "5.Show all task" << endl;
+			cin >> tmp;
+			cout << "Enter your text for search: ";
+			cin >> name;
+			createList->searchBy(name, tmp);
 			break;
 		case 3:
 			system("cls");
@@ -143,17 +157,9 @@ int main()
 			cin.ignore();
 			createList->edittask(tmp);
 			break;
-		case 5:
-			system("cls");
-			cout << "Enter search: ";
-			cin >> name;
-			createList->searchByName(name);
 		default:
 			return true;
 		}
 	}
-
-
-
 	return 0;
 }
