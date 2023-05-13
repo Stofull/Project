@@ -117,7 +117,8 @@ int main()
 			<< "1.Add task" << endl
 			<< "2.Show task" << endl
 			<< "3.Delete task" << endl
-			<< "4.Edit task" << endl;
+			<< "4.Edit task" << endl
+			<< "5.Search by name" << endl;
 		cin >> choise;
 		cin.ignore();
 		switch (choise)
