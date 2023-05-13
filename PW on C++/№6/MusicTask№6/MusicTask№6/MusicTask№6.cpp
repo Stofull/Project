@@ -99,7 +99,8 @@ int main()
 			<< "2.Show music list" << endl
 			<< "3.Delete music" << endl
 			<< "4.Edit music" << endl
-			<< "5.Search by avtor" << endl;
+			<< "5.Search by avtor" << endl
+			<< "Enter any other number to exit" << endl;
 		cin >> choise;
 		cin.ignore();
 		switch (choise)
