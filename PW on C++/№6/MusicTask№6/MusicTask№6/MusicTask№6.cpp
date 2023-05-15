@@ -14,8 +14,21 @@ struct mp3
 		cout << "Data: " << data << endl;
 	}
 };
+char* entry(char* text)
+{
+	FILE* file{};
+	fopen_s(&file, "data.txt", "r");
+	if (file == nullptr) {
+		cout << "Error" << endl;
+		return text;
+	}
+	fscanf_s(file, "%[^\n]", text, 200);
+	fclose(file);
+	return text;
+}
 struct createMP
 {
+	int tmp{};
 	mp3* list = new mp3{};
 	int count{};
 	mp3 CreateMP3()
@@ -23,16 +36,30 @@ struct createMP
 		mp3* read = new mp3{};
 		read->name = new char[50] {};
 		read->text = new char[200] {};
-		read->avtor = new char[50] {};
+		read->avtor = new char[30] {};
 		cout << "Enter music name: " << endl;
 		cin.getline(read->name, 20);
 		cout << "Enter music data: " << endl;
 		cin >> read->data;
 		cin.ignore();
-		cout << "Enter task text: " << endl;
-		cin.getline(read->text, 30);
+		cout
+			<< "Enter task text: " << endl
+			<< "1.Enter your text" << endl
+			<< "2.Write from file" << endl;
+		cin >> tmp;
+		if (tmp == 1) 
+		{
+			cin.ignore();
+			cout << "Enter task text: " << endl;
+			cin.getline(read->text, 200);
+		}
+		else if (tmp == 2) 
+		{
+			cin.ignore();
+			read->text = entry(read->text);
+		}
 		cout << "Enter music avtor: " << endl;
-		cin.getline(read->avtor, 20);
+		cin.getline(read->avtor, 30);
 		return *read;
 	}
 	void addMusic()
@@ -86,6 +113,19 @@ struct createMP
 		}
 	}
 };
+	void saveLyricsToFile(int tmp, createMP* createMusic)
+	{
+		FILE* file{};
+		char* lyrics = createMusic->list[tmp - 1].text;
+		fopen_s(&file, "data.txt", "w");
+		if (file == nullptr) {
+			cout << "Error" << endl;
+			return;
+		}
+		fprintf(file, "%s\n", lyrics);
+		if (file != nullptr)
+			fclose(file);
+	}
 int main()
 {
 	createMP* createMusic = new createMP{};
@@ -100,6 +140,7 @@ int main()
 			<< "3.Delete music" << endl
 			<< "4.Edit music" << endl
 			<< "5.Search by avtor" << endl
+			<< "6.Saving lyrics to a file" << endl
 			<< "Enter any other number to exit" << endl;
 		cin >> choise;
 		cin.ignore();
@@ -131,6 +172,12 @@ int main()
 			cout << "Enter search by avtor: ";
 			cin >> name;
 			createMusic->searchByAvtor(name);
+			break;
+		case 6:
+			system("cls");
+			cout << "Enter the number of the song whose lyrics you want to record" << endl;
+			cin >> tmp;
+			saveLyricsToFile(tmp, createMusic);
 			break;
 		default:
 			return true;
