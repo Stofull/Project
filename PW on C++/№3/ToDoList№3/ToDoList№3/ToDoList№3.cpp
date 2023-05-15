@@ -3,7 +3,7 @@ using namespace std;
 struct ToDoList
 {
 	char* name{};
-	int priorty{};
+	char* priorty{};
 	char* description{};
 	char* data{};
 	void print()
@@ -22,6 +22,7 @@ struct CreateToDo
 	{
 		ToDoList* readList = new ToDoList{};
 		readList->name = new char[30] {};
+		readList->priorty = new char[30] {};
 		readList->description = new char[30] {};
 		readList->data = new char[20] {};
 		cout << "Enter task name: ";
@@ -31,14 +32,14 @@ struct CreateToDo
 			<< "1.High" << endl
 			<< "2.Medium" << endl
 			<< "3.Easy" << endl;
-		cin >> readList->priorty;
+		cin.getline(readList->priorty, 30);
 		cout << "Enter task description: ";
 		cin.ignore();
 		cin.getline(readList->description, 30);
-		cout << "Enter task data: ";
+		cout << "Enter task date: ";
 		cin.getline(readList->data, 20);
 		return *readList;
-	}
+	}	
 	void addTask()
 	{
 		list[count] = CreateTaskToDo();
@@ -72,7 +73,7 @@ struct CreateToDo
 					found = true;
 				break;
 			case 2:
-				if (strcmp(list[i].data, tmp) == 0)
+				if (strcmp(list[i].priorty, tmp) == 0)
 					found = true;
 				break;
 			case 3:
@@ -108,6 +109,37 @@ struct CreateToDo
 			cout << "Not found" << endl;
 		}
 	}
+	void sortBy(int tmp)
+	{
+		for (int i = 0; i < count - 1; i++) {
+			for (int j = 0; j < count - i - 1; j++) 
+			{
+					if (tmp == 1)
+					{
+						if (strcmp(list[j].data, list[j + 1].data) > 0)
+						{
+							ToDoList temp = list[j];
+							list[j] = list[j + 1];
+							list[j + 1] = temp;
+						}
+					}
+					else if (tmp == 2)
+					{
+						if (strcmp(list[j].priorty, list[j + 1].priorty) > 0)
+						{
+							ToDoList temp = list[j];
+							list[j] = list[j + 1];
+							list[j + 1] = temp;
+						}
+					}
+			}
+		}
+		for (int i = 0; i < count; i++) {
+			cout << "Number " << i + 1 << "-th task" << endl;
+			list[i].print();
+			cout << endl;
+		}
+	}
 };
 int main()
 {
@@ -122,6 +154,7 @@ int main()
 			<< "2.Show task by" << endl
 			<< "3.Delete task" << endl
 			<< "4.Edit task" << endl
+			<< "5.Sort by data or priority" << endl
 			<< "Enter any other number to exit" << endl;
 		cin >> choise;
 		cin.ignore();
@@ -156,6 +189,12 @@ int main()
 			cin >> tmp;
 			cin.ignore();
 			createList->edittask(tmp);
+			break;
+		case 5: 
+			system("cls");
+			cout << "\tSorted by\n1.Data\n2.Priority" << endl;
+			cin >> tmp;
+			createList->sortBy(tmp);
 			break;
 		default:
 			return true;
