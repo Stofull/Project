@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{39d2749f-5585-433c-a19a-be71913d8e69}</ProjectGuid>
+    <ProjectGuid>{64db7d84-b182-4f59-91c3-df2c5e996356}</ProjectGuid>
     <RootNamespace>Task5calc</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
