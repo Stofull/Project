@@ -1,0 +1,16 @@
+|_________|_________|_________|
+| January | February|  March  |
+|  April  |   May   |  June   |
+|  July   |  August |September|
+| October | November| December|
+|_________|_________|_________|
+
+Магазин,Заправка,Одежда,Развлечения,Аптека,Еда
+
+
+
+
+
+
+
+
