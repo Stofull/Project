@@ -1,0 +1,7 @@
+Shop
+Gas
+Station
+Clothing
+Entertainment
+Pharmacy
+Restaurants

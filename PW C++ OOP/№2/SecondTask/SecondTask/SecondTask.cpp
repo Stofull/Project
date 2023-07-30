@@ -41,11 +41,10 @@ int keyFinding(int& x)
 	x = inputRec.Event.KeyEvent.wVirtualKeyCode;
 	return 0;
 }
-
-void txtReader(int x) {
-	ifstream inputFile("example.txt");
+void txtReader(string txt) {
+	ifstream inputFile(txt);
 	if (!inputFile.is_open()) {
-		cout << "Error opening " << "example.txt" << endl;
+		cout << "Error opening " << txt << endl;
 		return;
 	}
 	string line{};
@@ -54,17 +53,22 @@ void txtReader(int x) {
 	}
 	inputFile.close();
 }
-
-
+bool clicked(int& x, int& y)
+{
+	cout << "Click to continue" << endl;
+	getClick(x, y);
+	if (x != 0 || y != 0)return true;
+	return false;
+}
 class cardDebit 
 {
 private:
 	string name{};
-	int cardNum;
-	int expiredDate;
-	int balance;
+	uint64_t cardNum;
+	string expiredDate{};
+	float balance;
 public:
-	cardDebit(const string& name,int cardNum, int expiredDate, int balance) :
+	cardDebit(const string& name, uint64_t cardNum, const string& expiredDate, float balance) :
 		cardNum(cardNum), expiredDate(expiredDate), balance(balance),name(name) {};
 
 	friend ostream& operator<<(ostream& out, const cardDebit& visaDebit)
@@ -86,16 +90,22 @@ public:
 			cout << "Information has been written to the file." << endl;
 		}
 	}
+	void balanceReplenishment(int replenisment) {
+		balance += replenisment;
+	}
+	void balanceWithdraw(int withdraw) {
+		balance += withdraw;
+	}
 };
 class cardCredit
 {
 private:
 	string name{};
-	int cardNum;
-	int expiredDate;
-	int balance;
+	uint64_t cardNum;
+	string expiredDate{};
+	float balance;
 public:
-	cardCredit(const string& name, int cardNum, int expiredDate, int balance) :
+	cardCredit(const string& name, uint64_t cardNum, const string& expiredDate, float balance) :
 		cardNum(cardNum), expiredDate(expiredDate), balance(balance), name(name) {};
 
 	friend ostream& operator<<(ostream& out, const cardCredit& cardCredit)
@@ -117,101 +127,151 @@ public:
 			cout << "Information has been written to the file." << endl;
 		}
 	}
-};
-class MCDebit
-{
-private:
-	int cardNum;
-	int expiredDate;
-	int balance;
-public:
-	MCDebit(int cardNum, int expiredDate, int balance) :
-		cardNum(cardNum), expiredDate(expiredDate), balance(balance) {};
-
-
-};
-class MCKredit
-{
-private:
-	int cardNum;
-	int expiredDate;
-	int balance = 2000;
-public:
-	MCKredit(int cardNum, int expiredDate, int balance) :
-		cardNum(cardNum), expiredDate(expiredDate), balance(balance) {};
-
+	void balanceReplenishment(float replenisment) {
+		balance += replenisment;
+	}
+	void balanceWithdraw(float withdraw) {
+		balance += withdraw;
+	}
 };
 int main()
 {
+
+	cardDebit visaDebit("None", NULL, "None", NULL);
+	cardDebit visaCredit("None", NULL, "None", NULL);
+	cardDebit MCDebit("None", NULL, "None", NULL);
+	cardDebit MCCredit("None", NULL, "None", NULL);
 	remove("visaDebit.txt");
 	remove("visaCredit.txt");
 	remove("MasterCardDebit.txt");
 	remove("MasterCardCredit.txt");
-	//int turn{};
 	//cout << "select: " << endl;
+	//int turn{};
 	//txtReader(turn);
 	//cout << "Click on the console window or press Esc to exit." << endl;
 	//getClick(x, y, inputTxt);
 	//cout << inputTxt;
-
+	//keyFinding(money);
 	int x = 0;
 	int y = 0;
 	int money = 0;
-
-	while(true)
+	while (true)
 	{
-		cout
-			<< "Select your bank" << endl
-			<< "1.Visa\t\tDebit\tCredit" << endl
-			<< "2.MasterCard\tDebit\tCredit" << endl
+		system("cls");
+		cout << "Choose: " << endl
+			<< "1.Add new card" << endl
+			<< "2.Make a transaction" << endl
+			<< "3.Check all cards" << endl
 			<< "Press ESC for exiting" << endl;
-		getClick(x, y);
-		cout << "Clicked at coordinates: (" << x << ", " << y << ")" << endl;
-
 		if (GetAsyncKeyState(VK_ESCAPE)) {
 			break;
 		}
-		if (y == 1 && 16 <= x && x <= 20)
+		getClick(x, y);
+		//cout << "Clicked at coordinates: (" << x << ", " << y << ")" << endl;
+		switch (y)
 		{
-			keyFinding(money);
+		case 1:
 			system("cls");
-			cout << "Enter balance: ";
-			cin >> money;
-			cardDebit visaDeb("Visa", 123123, 2211, money);
-			cout << visaDeb;
-			visaDeb.writeToFile("visaDebit.txt");
-		}
-		else if (y == 1 && 24 <= x && x <= 29)
-		{
+			cout
+				<< "Select your bank" << endl
+				<< "1.Visa\t\tDebit\tCredit" << endl
+				<< "2.MasterCard\tDebit\tCredit" << endl;
+			getClick(x, y);
+			if (y == 1 && 16 <= x && x <= 20)
+			{
+				ifstream inputFile("visaDebit.txt");
+				if (inputFile.is_open())
+					break;
+				cardDebit visaDebit("Visa Debit", 4096584412364541, "08/28", 0);
+				cout << "Debut visa card added to your wallet" << endl;
+				visaDebit.writeToFile("visaDebit.txt");
+			}
+			else if (y == 1 && 24 <= x && x <= 29)
+			{
+				ifstream inputFile("visaCredit.txt");
+				if (inputFile.is_open())
+					break;
+				cardCredit visaCredit("Visa Credit", 4096584448681284, "08/28",2000);
+				cout << "Kredit visa card added to your wallet" << endl;
+				visaCredit.writeToFile("visaCredit.txt");
+			}
+			else if (y == 2 && 16 <= x && x <= 20)
+			{
+				ifstream inputFile("MasterCardDebit.txt");
+				if (inputFile.is_open())
+					break;
+				cout << "Debut MasterCard added to your wallet" << endl;
+				cardDebit MCDebit("MasterCard Debit", 5096584412364875, "08/28", 0);
+				MCDebit.writeToFile("MasterCardDebit.txt");
+			}
+			else if (y == 2 && 24 <= x && x <= 29)
+			{
+				ifstream inputFile("MasterCardCredit.txt");
+				if (inputFile.is_open())
+					break;
+				cardCredit MDCredit("MasterCard Credit", 5096584412475524, "08/28", 2000);
+				cout << "Kredit MasterCard added to your wallet" << endl;
+				MDCredit.writeToFile("MasterCardCredit.txt");
+			}
+			if (clicked(x, y)) break;
+			break;
+		case 2:
 			system("cls");
-			money += 2000;
-			cardCredit visaCredit("Visa", 123123, 2211,money);
-			cout << visaCredit;
-			visaCredit.writeToFile("visaCredit.txt");
+			cout <<"Select your card" << endl
+				<< "Visa debit" << endl
+				<< "Visa credit" << endl
+				<< "MasterCard debit" << endl
+				<< "MasterCard credit" << endl;
+			getClick(x, y);
+			if (y == 1) {
+				keyFinding(money);
+				cout << "How much do you want to upload?" << endl;
+				cin >> money;
+				visaDebit.balanceReplenishment(money);
+				visaDebit.writeToFile("visaDebit.txt");
+			}
+			else if (y == 2)
+			{
+				cout << "How much do you want to upload?" << endl;
+				cin >> money;
+				keyFinding(money);
+				visaCredit.balanceReplenishment(money);
+				visaCredit.writeToFile("visaCredit.txt");
+			}
+			else if (y == 3) {
+				cout << "How much do you want to upload?" << endl;
+				cin >> money;
+				keyFinding(money);
+				MCDebit.balanceReplenishment(money);
+				MCDebit.writeToFile("MasterCardDebit.txt");
+
+			}
+			else if (y == 4) {
+				cout << "How much do you want to upload?" << endl;
+				cin >> money;
+				keyFinding(money);
+				MCCredit.balanceReplenishment(money);
+				MCCredit.writeToFile("MasterCardCredit.txt");
+			}
+			if (clicked(x, y)) break;
+			break;
+		case 3:
+			while (true)
+			{
+				system("cls");
+				txtReader("visaDebit.txt");
+				txtReader("visaCredit.txt");
+				txtReader("MasterCardDebit.txt");
+				txtReader("MasterCardCredit.txt");
+				if (clicked(x, y)) break;
+			}
+			break;
+		default:
+			cout << "Use Options" << endl;
+			break;
 
 		}
-		else if (y == 2 && 16 <= x && x <= 20)
-		{
-			keyFinding(money);
-			system("cls");
-			cout << "Enter balance: ";
-			cin >> money;
-			cardDebit MCDed("MasterCard", 123123, 2211, money);
-			cout << MCDed;
-			MCDed.writeToFile("MasterCardDebit.txt");
-		}
-		else if (y == 2 && 24 <= x && x <= 29)
-		{
-			system("cls");
-			money += 2000;
-			cardCredit MDCredit("MasterCard", 123123, 2211, money);
-			cout << MDCredit;
-			MDCredit.writeToFile("MasterCardCredit.txt");
-		}
-		money = 0;
 	}
-
-	// Дописать рандомную запись номеров карт так же и конец даты и перевести её в строку из-за слэша
 	// Из ТХТ файла переписать категории и таблицу с месяцами
 	// Продумать систему недель и месяца 
 	// Переписать весь код в два СРР и один .H файл
