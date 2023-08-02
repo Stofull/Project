@@ -15,7 +15,7 @@ int Expense::getAmount() const {
     return amount;
 }
 
-Card::Card(const  string& name, uint64_t cardNum, const  string& expiredDate, int balance)
+Card::Card(const  string& name, string cardNum, const  string& expiredDate, int balance)
     : name(name), cardNum(cardNum), expiredDate(expiredDate), balance(balance) {}
 
 Card::~Card() {}
@@ -91,7 +91,7 @@ string DebitCard::getType() const {
 }
 
 void CreditCard::addExpense(const  string& category, int amount, const  string& date) {
-    static const  regex dateRegex(R"(^\d{4}-\d{2}-\d{2}$)");
+    static const  regex dateRegex(R"(^\d{4}[.-]\d{2}[.-]\d{2}$)");
 
     if (!regex_match(date, dateRegex)) {
         throw  runtime_error("Invalid date format. Use YYYY-MM-DD.");

@@ -1,4 +1,0 @@
-Bank name: Visa Debit
-Card Number: 4096584412364541
-Expiration Date: 08/28
-Balance: 250

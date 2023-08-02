@@ -23,12 +23,12 @@ public:
 class Card {
 protected:
     string name;
-    uint64_t cardNum;
+    string cardNum;
     string expiredDate;
     int balance;
     vector<Expense> expenses;
 public:
-    Card(const  string& name, uint64_t cardNum, const  string& expiredDate, int balance);
+    Card(const  string& name, string cardNum, const  string& expiredDate, int balance);
     virtual ~Card();
     string getName() const;
     int getBalance() const;

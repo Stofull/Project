@@ -2,10 +2,10 @@
 
 int main() {
     ExpenseTracker tracker;
-    Card* visaDebit = new DebitCard("Visa Debit", 4096584412364541, "08/28", 1000);
-    Card* visaCredit = new CreditCard("Visa Credit", 4096584448681284, "08/28", 2000);
-    Card* masterCardDebit = new DebitCard("MasterCard Debit", 5096584412364875, "08/28", 500);
-    Card* masterCardCredit = new CreditCard("MasterCard Credit", 5096584412475524, "08/28", 3000);
+    Card* visaDebit = new DebitCard("Visa Debit", "4096584412364541", "08/28", 0);
+    Card* visaCredit = new CreditCard("Visa Credit", "4096584448681284", "08/28", 2000);
+    Card* masterCardDebit = new DebitCard("MasterCard Debit", "5096584412364875", "08/28", 0);
+    Card* masterCardCredit = new CreditCard("MasterCard Credit", "5096584412475524", "08/28", 2000);
     int money = 0;
     int categoryIndex = 0;
     int cardIndex = 0;
@@ -76,8 +76,13 @@ int main() {
                         cout << "Enter the date of the transaction (YYYY-MM-DD): " << endl;
                         cin.ignore();
                         getline(cin, date);
-                        selectedCard->addExpense(tracker.categories[categoryIndex], money, date);
-                    }
+                        try {
+                            selectedCard->addExpense(tracker.categories[categoryIndex], money, date);
+                        }
+                        catch(exception& ex){
+                            cout << ex.what() << endl;
+                        }
+                        }
                     else {
                         cout << "Invalid category selection" << endl;
                     }
