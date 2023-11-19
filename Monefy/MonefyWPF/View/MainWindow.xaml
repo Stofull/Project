@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MonefyWPF.View"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:lc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="MyMonefy"  Height="800" Width="800" FontSize="17"
+        Title="MyMonefy"  Height="600" Width="1000" FontSize="17"
      Background="{Binding Background,UpdateSourceTrigger=PropertyChanged}" >
     <Grid>
         <Grid.Background>
@@ -149,6 +150,7 @@
                     </EventTrigger.Actions>
                 </EventTrigger>
             </Menu.Triggers>
+            
         </Menu>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
@@ -206,6 +208,10 @@
             <Button x:Name="Restaurants" Click="Button_Click"  Background="Transparent" BorderBrush="Transparent" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" BorderThickness="0">
                 <Image Source="pack://application:,,,/View/images/restaurants.png"></Image>
             </Button>
+            <Grid  Grid.Row="1" Grid.Column="2" Grid.RowSpan="4" Grid.ColumnSpan="2">
+                <lc:PieChart Hoverable="True" InnerRadius="0" Series="{Binding SeriesColl}" >
+                </lc:PieChart>
+            </Grid>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -216,7 +222,7 @@
             <Grid Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="1.6*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -267,7 +273,7 @@
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="1.6*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>

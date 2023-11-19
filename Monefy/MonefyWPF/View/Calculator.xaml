@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MonefyWPF.View"
         mc:Ignorable="d"
-        Title="Calculator" Height="500" Width="450" Background="{Binding Background}">
+        Title="Calculator" Height="500" Width="450" >
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/View/green.png"/>
@@ -86,63 +86,61 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Content="C"  Grid.Row="0" Grid.Column="1" Click="DeleteButtons_Click">
+            <Button Content="C"  Grid.Row="0" Grid.Column="1" Click="DeleteButtons_Click" Background="{x:Null}" Foreground="Black">
 
             </Button>
-            <Button Content="&lt;" Grid.Row="0" Grid.Column="2" Click="DeleteButtons_Click">
-
-            </Button>
-            <Button Content="/"  Grid.Row="0" Grid.Column="3" Click="OperatorButtons_Click">
+            <Button Content="&lt;" Grid.Row="0" Grid.Column="2" Click="DeleteButtons_Click" Background="{x:Null}" Foreground="Black"/>
+            <Button Content="/"  Grid.Row="0" Grid.Column="3" Click="OperatorButtons_Click" Foreground="Black" Background="{x:Null}">
 
             </Button>
 
-            <Button Content="7" Background= "White "  Click="Button_Click" Grid.Row="1" Grid.Column="0">
+            <Button Content="7" Background= "{x:Null}"  Click="Button_Click" Grid.Row="1" Grid.Column="0" Foreground="Black">
 
             </Button>
-            <Button Content="8" Background= "White "  Click="Button_Click" Grid.Row="1" Grid.Column="1">
+            <Button Content="8" Background= "{x:Null}"  Click="Button_Click" Grid.Row="1" Grid.Column="1" Foreground="Black">
 
             </Button>
-            <Button Content="9" Background= "White " Click="Button_Click" Grid.Row="1" Grid.Column="2">
+            <Button Content="9" Background= "{x:Null}" Click="Button_Click" Grid.Row="1" Grid.Column="2" Foreground="Black">
 
             </Button>
-            <Button Content="x" Grid.Row="1" Grid.Column="3" Click="OperatorButtons_Click">
+            <Button Content="x" Grid.Row="1" Grid.Column="3" Click="OperatorButtons_Click" Background="{x:Null}" Foreground="Black">
 
             </Button>
-            <Button Content="4" Background= "White " Click="Button_Click" Grid.Row="2" Grid.Column="0">
+            <Button Content="4" Background= "{x:Null}" Click="Button_Click" Grid.Row="2" Grid.Column="0" Foreground="Black">
 
             </Button>
-            <Button Content="5" Background= "White " Click="Button_Click" Grid.Row="2" Grid.Column="1">
+            <Button Content="5" Background= "{x:Null}" Click="Button_Click" Grid.Row="2" Grid.Column="1" Foreground="Black">
 
             </Button>
-            <Button Content="6" Background= "White " Click="Button_Click" Grid.Row="2" Grid.Column="2">
+            <Button Content="6" Background= "{x:Null}" Click="Button_Click" Grid.Row="2" Grid.Column="2" Foreground="Black">
 
             </Button>
-            <Button Content="-" Grid.Row="2" Grid.Column="3" Click="OperatorButtons_Click">
+            <Button Content="-" Grid.Row="2" Grid.Column="3" Click="OperatorButtons_Click" Background="{x:Null}" Foreground="Black">
 
             </Button>
-            <Button Content="1" Background= "White " Click="Button_Click" Grid.Row="3" Grid.Column="0">
+            <Button Content="1" Background= "{x:Null}" Click="Button_Click" Grid.Row="3" Grid.Column="0" Foreground="Black">
 
             </Button>
-            <Button Content="2" Background= "White " Click="Button_Click" Grid.Row="3" Grid.Column="1">
+            <Button Content="2" Background= "{x:Null}" Click="Button_Click" Grid.Row="3" Grid.Column="1" Foreground="Black">
 
             </Button>
-            <Button Content="3" Background= "White "  Click="Button_Click" Grid.Row="3" Grid.Column="2">
+            <Button Content="3" Background= "{x:Null}"  Click="Button_Click" Grid.Row="3" Grid.Column="2" Foreground="Black">
 
             </Button>
-            <Button Content="+" Grid.Row="3" Grid.Column="3" Click="OperatorButtons_Click">
+            <Button Content="+" Grid.Row="3" Grid.Column="3" Click="OperatorButtons_Click" Foreground="Black" Background="{x:Null}">
 
             </Button>
 
-            <Button Content="0" Background= "White " Grid.Row="4" Grid.Column="1" Click="Button_Click"  >
+            <Button Content="0" Background= "{x:Null}" Grid.Row="4" Grid.Column="1" Click="Button_Click" Foreground="Black"  >
 
             </Button>
-            <Button Content="." Grid.Row="4" Grid.Column="0" Click="Button_Click" >
+            <Button Content="." Grid.Row="4" Grid.Column="0" Click="Button_Click" Background="{x:Null}" Foreground="Black" >
 
             </Button>
-            <Button Content="=" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Click="EqualButton_Click">
+            <Button Content="=" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Click="EqualButton_Click" Background="{x:Null}" Foreground="Black">
 
             </Button>
-            <Button x:Name="AddButton" Background="#CCFFE5" BorderThickness="2" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Command="{Binding AddCommand,UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding SelectedCategory,UpdateSourceTrigger=PropertyChanged}" Click="AddButton_Click"></Button>
+            <Button x:Name="AddButton" Background="{x:Null}" BorderThickness="2" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Command="{Binding AddCommand,UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding SelectedCategory,UpdateSourceTrigger=PropertyChanged}" Click="AddButton_Click" Foreground="Black"></Button>
         </Grid>
     </Grid>
 </Window>
