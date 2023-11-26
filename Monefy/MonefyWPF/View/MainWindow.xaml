@@ -209,7 +209,7 @@
                 <Image Source="pack://application:,,,/View/images/restaurants.png"></Image>
             </Button>
             <Grid  Grid.Row="1" Grid.Column="2" Grid.RowSpan="4" Grid.ColumnSpan="2">
-                <lc:PieChart Hoverable="True" InnerRadius="0" Series="{Binding SeriesColl}" >
+                <lc:PieChart Hoverable="True" InnerRadius="60" Series="{Binding SeriesColl}">
                 </lc:PieChart>
             </Grid>
         </Grid>
