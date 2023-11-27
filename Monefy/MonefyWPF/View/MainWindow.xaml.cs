@@ -29,6 +29,7 @@ namespace MonefyWPF.View
             InitializeComponent();
             MainViewModel viewModel = new MainViewModel(new ExpenseFileService(),new CategoryFileService(),new IncomeFileService());
             DataContext =viewModel;
+
          }
         private void Button_MouseEnter(object sender, MouseEventArgs e)
         {

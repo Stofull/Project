@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MonefyWPF.View"
         mc:Ignorable="d"
-        Title="Transactions" Height="600" Width="1000" Background="{Binding Background}"  FontSize="25" >
+        Title="Transactions" Height="600" Width="900" Background="{Binding Background}"  FontSize="25" >
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/View/green.png"/>
+            <ImageBrush ImageSource="/View/images/green.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -20,10 +20,10 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0" Background="Red">
+        <Grid Grid.Row="0" Grid.Column="0">
             <Label HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" >Expenses</Label>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="1" Background="#FF00FF34">
+        <Grid Grid.Row="0" Grid.Column="1">
             <Label HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" >Incomes</Label>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0" >
@@ -104,8 +104,8 @@
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label HorizontalAlignment="Center" VerticalAlignment="Center">Sort by:</Label>
-            <Button Command="{Binding AmountSortCommand}" Grid.Column="2" Style="{StaticResource GreenButton}">Amount</Button>
-            <Button Command="{Binding DateSortCommand}" Grid.Column="4" Style="{StaticResource RedButton}">Date</Button>
+            <Button Command="{Binding AmountSortCommand}" Grid.Column="2" Background="{x:Null}" BorderBrush="Black">Amount</Button>
+            <Button Command="{Binding DateSortCommand}" Grid.Column="4" Background="{x:Null}" BorderBrush="Black" >Date</Button>
         </Grid>
     </Grid>
 </Window>
